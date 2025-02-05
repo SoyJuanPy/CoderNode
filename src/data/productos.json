@@ -1,0 +1,22 @@
+[
+	{
+		"id": 1,
+		"title": "Laptop Gamer",
+		"description": "Laptop con procesador Intel i7 y tarjeta gráfica RTX 3060",
+		"code": "LAP123",
+		"price": 1500,
+		"stock": 5,
+		"category": "Tecnología",
+		"thumbnails": ["imagen1.jpg", "imagen2.jpg"]
+	},
+	{
+		"id": 2,
+		"title": "Mouse Inalámbrico",
+		"description": "Mouse ergonómico con conexión Bluetooth",
+		"code": "MOU456",
+		"price": 30,
+		"stock": 50,
+		"category": "Accesorios",
+		"thumbnails": ["mouse.jpg"]
+	}
+]

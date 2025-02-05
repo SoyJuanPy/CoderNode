@@ -1,6 +1,6 @@
-# Servidor Básico con Bun y Nodemon
+# Servidor Básico
 
-Este proyecto es un servidor básico configurado para usar Bun y Nodemon. Ideal para arrancar rápido y tener un entorno de desarrollo ágil.
+Esto es un servidor con express usando Nodemon y bun.
 
 ## Requisitos
 
@@ -12,7 +12,7 @@ Este proyecto es un servidor básico configurado para usar Bun y Nodemon. Ideal 
 1. Cloná el repositorio:
 
    ```bash
-   git clone git@github.com:SoyJuanPy/CoderNode.git
+   git clone https://github.com/SoyJuanPy/CoderNode.git
    cd CoderNode
    ```
 
@@ -27,7 +27,7 @@ Este proyecto es un servidor básico configurado para usar Bun y Nodemon. Ideal 
 Para iniciar el servidor en modo desarrollo con Nodemon:
 
 ```bash
-nodemon --exec bun run src/index.ts
+nodemon --exec bun run src/app.js
 ```
 
 Esto va a iniciar el servidor y reiniciarlo automáticamente cada vez que hagas cambios en el código.
@@ -42,11 +42,9 @@ CoderNode
 │   │   ├── CartManager.js
 │   │   └── ProductManager.js
 │   ├── routes/
-│   │   ├── cart.js
-│   │   └── products.js
 │   └── data/
+│       ├── carrito.js
+│       └── productos.js
 ├── package.json
 └── README.md
-
-
 ```
