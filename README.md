@@ -43,8 +43,8 @@ CoderNode
 │   │   └── ProductManager.js
 │   ├── routes/
 │   └── data/
-│       ├── carrito.js
-│       └── productos.js
+│       ├── carrito.json
+│       └── productos.json
 ├── package.json
 └── README.md
 ```
