@@ -35,9 +35,14 @@ Esto va a iniciar el servidor y reiniciarlo automáticamente cada vez que hagas 
 ## Estructura del Proyecto
 
 ```plaintext
-tu-repo/
+CoderNode
 ├── src/
-│   └── index.ts
+│   ├── data/
+│   ├── models/
+    |   |-- arrancar
+│   |
+│   ├── routes/
+│   └── app.js
 ├── package.json
 └── README.md
 ```
