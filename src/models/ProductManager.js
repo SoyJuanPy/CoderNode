@@ -29,7 +29,6 @@ export class ProductManager {
 			const data = await readFile(path, "utf-8");
 			const products = JSON.parse(data);
 
-			// Verifica si ya existe un producto con el mismo código
 			if (products.some((p) => p.code === product.code)) {
 				throw new Error("El código de producto ya existe.");
 			}
