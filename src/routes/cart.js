@@ -1,5 +1,6 @@
 import express from "express";
 import { CartManager } from "../models/CartManager.js";
+
 export const cart = () => {
 	const router = express.Router();
 	const cartManager = new CartManager();
@@ -7,7 +8,9 @@ export const cart = () => {
 	router.get("/:cid", async (req, res) => {
 		try {
 			const cart = await cartManager.getCart(Number(req.params.cid));
-			cart ? res.json(cart) : res.status(404).json({ error: "No se encontro" });
+			cart
+				? res.json(cart)
+				: res.status(404).json({ error: "No se encontró el carrito" });
 		} catch (error) {
 			res.status(500).json({ error: "Error de servidor" });
 		}
@@ -22,4 +25,6 @@ export const cart = () => {
 			res.status(400).json({ error: error.message });
 		}
 	});
+
+	return router;
 };
