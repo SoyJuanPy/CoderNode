@@ -5,10 +5,10 @@ import { cart } from "./routes/cart.js";
 const app = express();
 app.use(express.json());
 
-app.use("/api/products", products);
-app.use("/api/carts", cart);
+app.use("/api/products", products());
+app.use("/api/carts", cart());
 
-const PORT = 8080;
+const PORT = 3000;
 
 app.listen(PORT, () => {
 	console.log(`El servidor esta en http://localhost:${PORT}`);

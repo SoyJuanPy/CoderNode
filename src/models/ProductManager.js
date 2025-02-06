@@ -1,8 +1,7 @@
 import { readFile, writeFile } from "fs/promises";
 import path from "path";
 
-const filePath = path.resolve("data", "productos.json");
-
+const filePath = path.resolve(__dirname, "../data/productos.json");
 export class ProductManager {
 	async getProducts(limit) {
 		try {

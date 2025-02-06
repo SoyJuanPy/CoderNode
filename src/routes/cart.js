@@ -5,9 +5,19 @@ export const cart = () => {
 	const router = express.Router();
 	const cartManager = new CartManager();
 
+	router.get("/", async (req, res) => {
+		try {
+			const carts = await cartManager.getAllCarts();
+			res.json(carts);
+		} catch (error) {
+			res.status(500).json({ error: "Error al obtener los carritos" });
+		}
+	});
+
 	router.get("/:cid", async (req, res) => {
 		try {
-			const cart = await cartManager.getCart(Number(req.params.cid));
+			const cid = parseInt(req.params.cid, 10);
+			const cart = await cartManager.getCart(cid);
 			cart
 				? res.json(cart)
 				: res.status(404).json({ error: "No se encontró el carrito" });
@@ -18,8 +28,9 @@ export const cart = () => {
 
 	router.post("/:cid/product/:pid", async (req, res) => {
 		try {
-			const { cid, pid } = req.params;
-			const cart = await cartManager.addProductToCart(Number(cid), Number(pid));
+			const cid = parseInt(req.params.cid, 10);
+			const pid = parseInt(req.params.pid, 10);
+			const cart = await cartManager.addProductToCart(cid, pid);
 			res.json(cart);
 		} catch (error) {
 			res.status(400).json({ error: error.message });

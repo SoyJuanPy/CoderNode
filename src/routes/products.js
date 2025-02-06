@@ -16,8 +16,16 @@ export const products = () => {
 			.notEmpty()
 			.withMessage("La descripción es obligatoria."),
 		body("code").isString().notEmpty().withMessage("El código es obligatorio."),
-		body("price").isNumeric().withMessage("El precio debe ser un número."),
-		body("stock").isNumeric().withMessage("El stock debe ser un número."),
+		body("price")
+			.isNumeric()
+			.withMessage("El precio debe ser un número.")
+			.custom((value) => value > 0)
+			.withMessage("El precio debe ser mayor a 0."),
+		body("stock")
+			.isNumeric()
+			.withMessage("El stock debe ser un número.")
+			.custom((value) => value >= 0)
+			.withMessage("El stock no puede ser negativo."),
 		body("category")
 			.isString()
 			.notEmpty()
@@ -31,6 +39,11 @@ export const products = () => {
 	router.get("/", async (req, res) => {
 		try {
 			const limit = req.query.limit;
+			if (limit && isNaN(Number(limit))) {
+				return res
+					.status(400)
+					.json({ error: "El parámetro 'limit' debe ser un número." });
+			}
 			const products = await productManager.getProducts(
 				limit ? Number(limit) : null,
 			);
@@ -45,9 +58,12 @@ export const products = () => {
 			const product = await productManager.getProductById(
 				Number(req.params.pid),
 			);
-			product
-				? res.json(product)
-				: res.status(404).json({ error: "Producto no encontrado" });
+			if (!product) {
+				return res
+					.status(404)
+					.json({ error: "Producto no encontrado con el ID proporcionado." });
+			}
+			res.json(product);
 		} catch (error) {
 			res.status(500).json({ error: "Error interno del servidor" });
 		}
@@ -56,14 +72,17 @@ export const products = () => {
 	router.post("/", validateProduct, async (req, res) => {
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
+			console.log(errors.array());
 			return res.status(400).json({ errors: errors.array() });
 		}
 
 		try {
-			const newProduct = await productManager.addProduct(req.body);
-			res.status(201).json(newProduct);
+			const product = req.body;
+			const addedProduct = await productManager.addProduct(product);
+			res.status(201).json(addedProduct);
 		} catch (error) {
-			res.status(400).json({ error: error.message });
+			console.error(error);
+			res.status(500).json({ error: "Error al agregar el producto" });
 		}
 	});
 
